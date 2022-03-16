@@ -2,79 +2,69 @@ package by.tc.task01.entity;
 
 import by.tc.task01.entity.criteria.SearchCriteria;
 
-import java.util.Map;
+import java.util.ArrayList;
 
-public class TabletPC extends Appliance{
+public class TabletPC implements Appliance {
 
     private double batteryCapacity;
+    private String operationSystem;
     private double displayInches;
-    private int memoryROM;
+    private int memoryRAM;
     private int flashMemoryCapacity;
     private String colour;
 
-    public TabletPC(double batteryCapacity, double displayInches,
-                    int memoryROM, int flashMemoryCapacity,
-                    String colour) {
+    public TabletPC(double batteryCapacity, String os,
+                    double displayInches, int memoryROM,
+                    int flashMemoryCapacity, String colour) {
         this.batteryCapacity = batteryCapacity;
+        this.operationSystem = os;
         this.displayInches = displayInches;
-        this.memoryROM = memoryROM;
+        this.memoryRAM = memoryROM;
         this.flashMemoryCapacity = flashMemoryCapacity;
         this.colour = colour;
-    }
-
-    public TabletPC(Map<String, Object> keyValueSet) {
-        for(Map.Entry entry : keyValueSet.entrySet()) {
-            if (entry.getValue().equals(SearchCriteria.TabletPC.BATTERY_CAPACITY.toString())) {
-                this.batteryCapacity = new Double(entry.getValue().toString());
-            } else if (entry.getValue().equals(SearchCriteria.TabletPC.DISPLAY_INCHES.toString())) {
-                this.displayInches = new Double(entry.getValue().toString());
-            } else if (entry.getValue().equals(SearchCriteria.TabletPC.MEMORY_ROM.toString())) {
-                this.memoryROM = new Integer(entry.getValue().toString());
-            } else if (entry.getValue().equals(SearchCriteria.TabletPC.FLASH_MEMORY_CAPACITY.toString())) {
-                this.flashMemoryCapacity = new Integer(entry.getValue().toString());
-            } else if (entry.getValue().equals(SearchCriteria.TabletPC.COLOR.toString())) {
-                this.colour = entry.getValue().toString();
-            }
-        }
     }
 
     public double getBatteryCapacity() {
         return batteryCapacity;
     }
 
-    public void setBatteryCapacity(double batteryCapacity) {
-        this.batteryCapacity = batteryCapacity;
-    }
-
     public double getDisplayInches() {
         return displayInches;
     }
 
-    public void setDisplayInches(double displayInches) {
-        this.displayInches = displayInches;
-    }
-
-    public int getMemoryROM() {
-        return memoryROM;
-    }
-
-    public void setMemoryROM(int memoryROM) {
-        this.memoryROM = memoryROM;
+    public int getMemoryRAM() {
+        return memoryRAM;
     }
 
     public int getFlashMemoryCapacity() {
         return flashMemoryCapacity;
     }
 
-    public void setFlashMemoryCapacity(int flashMemoryCapacity) {
-        this.flashMemoryCapacity = flashMemoryCapacity;
-    }
-
     public String getColour() {
         return colour;
     }
 
-    public void setColour(String colour) {
-        this.colour = colour;
+    public String getOperationSystem() { return operationSystem; }
+
+    public String toString() {
+        String className = this.getClass().getSimpleName();
+        String[] values = getValues();
+        SearchCriteria.TabletPC[] names = SearchCriteria.TabletPC.values();
+        StringBuilder result = new StringBuilder(className + " : ");
+        for(int i = 0; i < names.length; i++) {
+            result.append(names[i]).append("=").append(values[i]);
+        }
+        return result.toString();
+    }
+
+    private String[] getValues() {
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add(Double.toString(getBatteryCapacity()));
+        strings.add(getOperationSystem());
+        strings.add(Double.toString(getDisplayInches()));
+        strings.add(Integer.toString(getMemoryRAM()));
+        strings.add(Integer.toString(getFlashMemoryCapacity()));
+        strings.add(getColour());
+        return strings.toArray(new String[0]);
     }
 }

@@ -7,24 +7,27 @@ import by.tc.task01.entity.criteria.Criteria;
 import java.io.*;
 import java.util.*;
 
-import static by.tc.task01.entity.Appliance.createAppliance;
-
 public class ApplianceDAOImpl implements ApplianceDAO{
+
+	public static final String file = "appliances_db.txt";
 
 	@Override
 	public List<Appliance> find(Criteria criteria) {
-		String dbFile = Objects.requireNonNull(getClass().getClassLoader().getResource("appliances_db.txt")).getPath();
+		String dbFile = Objects.requireNonNull(getClass().getClassLoader().getResource(file)).getPath();
 		List<Appliance> searchResultList = new ArrayList<>();
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(dbFile))) {
 			String line = reader.readLine();
 			while(line != null) {
 				String[] parsedLineArray = parseLine(line);
-				if(criteria.getGroupSearchName().equals(parsedLineArray[0])) {
-					Map<String, Object> dbLineMap = parseMapFromLine(parsedLineArray[1]);
-					Map<String, Object> criteriaMap = criteria.getCriteria();
-					if (dbLineMap.entrySet().containsAll(criteriaMap.entrySet())) {
-						searchResultList.add(createAppliance(parsedLineArray[0], dbLineMap));
+				if(criteria.getGroupSearchName().equals(parsedLineArray[0]) || criteria.getGroupSearchName().isEmpty()) {
+
+					List<String> dbKeyValueStrings = parseKeyValueStringsFromLine(parsedLineArray[1]);
+					List<String> criteriaStrings = criteria.getCriteriaStrings();
+					if (dbKeyValueStrings.containsAll(criteriaStrings)) {
+						ApplianceDirector director = new ApplianceDirector(parsedLineArray[0]);
+
+						searchResultList.add(director.createAppliance(parseValuesFromDbList(dbKeyValueStrings)));
 					}
 				}
 				line = reader.readLine();
@@ -40,21 +43,19 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 	}
 
 	private String[] parseLine(String line) {
-		String[] stringList = line.split("(\\s:\\s)");
-		return stringList;
+		return line.split("(\\s:\\s)");
 	}
 
-	private Map<String, Object> parseMapFromLine(String line) {
-		Map<String, Object> resultMap = new HashMap<>();
-		String[] strings = line.split("(,\\s)");
-		for(String string : strings) {
-			String[] nameValueArray = string.split("(=)");
-			resultMap.put(nameValueArray[0], nameValueArray[1]);
+	private List<String> parseKeyValueStringsFromLine(String line) {
+		return Arrays.asList(line.split("(,\\s)"));
+	}
+
+	private String[] parseValuesFromDbList(List<String> dbList) {
+		ArrayList<String> resultList = new ArrayList<>();
+		for(String element : dbList) {
+			resultList.add(element.split("(=)")[1]);
 		}
-		return resultMap;
+		return resultList.toArray(new String[0]);
 	}
 
 }
-
-
-//you may add your own new classes

@@ -41,7 +41,7 @@ public class Main {
 		Criteria criteriaTabletPC = new Criteria(TabletPC.class.getSimpleName());
 		criteriaTabletPC.add(TabletPC.COLOR.toString(), "blue");
 		criteriaTabletPC.add(TabletPC.DISPLAY_INCHES.toString(), 14);
-		criteriaTabletPC.add(TabletPC.MEMORY_ROM.toString(), 2);
+		criteriaTabletPC.add(TabletPC.MEMORY_RAM.toString(), 8);
 
 		appliance = service.find(criteriaOven);// find(Object...obj)
 
