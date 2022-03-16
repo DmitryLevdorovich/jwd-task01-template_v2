@@ -58,7 +58,7 @@ public class Refrigerator implements Appliance {
         SearchCriteria.Refrigerator[] names = SearchCriteria.Refrigerator.values();
         StringBuilder result = new StringBuilder(className + " : ");
         for(int i = 0; i < names.length; i++) {
-            result.append(names[i]).append("=").append(values[i]);
+            result.append(names[i]).append("=").append(values[i]).append(" ");
         }
         return result.toString();
     }

@@ -43,7 +43,7 @@ public class Main {
 		criteriaTabletPC.add(TabletPC.DISPLAY_INCHES.toString(), 14);
 		criteriaTabletPC.add(TabletPC.MEMORY_RAM.toString(), 8);
 
-		appliance = service.find(criteriaOven);// find(Object...obj)
+		appliance = service.find(criteriaTabletPC);// find(Object...obj)
 
 		PrintApplianceInfo.print(appliance);
 

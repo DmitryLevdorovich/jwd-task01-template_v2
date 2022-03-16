@@ -54,7 +54,7 @@ public class Laptop implements Appliance {
         SearchCriteria.Laptop[] names = SearchCriteria.Laptop.values();
         StringBuilder result = new StringBuilder(className + " : ");
         for(int i = 0; i < names.length; i++) {
-            result.append(names[i]).append("=").append(values[i]);
+            result.append(names[i]).append("=").append(values[i]).append(" ");
         }
         return result.toString();
     }

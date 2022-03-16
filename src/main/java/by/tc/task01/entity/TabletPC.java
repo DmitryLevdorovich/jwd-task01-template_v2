@@ -52,7 +52,7 @@ public class TabletPC implements Appliance {
         SearchCriteria.TabletPC[] names = SearchCriteria.TabletPC.values();
         StringBuilder result = new StringBuilder(className + " : ");
         for(int i = 0; i < names.length; i++) {
-            result.append(names[i]).append("=").append(values[i]);
+            result.append(names[i]).append("=").append(values[i]).append(" ");
         }
         return result.toString();
     }
