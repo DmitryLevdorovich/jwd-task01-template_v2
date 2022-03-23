@@ -1,5 +1,6 @@
 package by.tc.task01.entity.criteria;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

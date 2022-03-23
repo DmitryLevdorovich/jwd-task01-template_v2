@@ -1,5 +1,8 @@
 package by.tc.task01.entity.criteria;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class SearchCriteria {
 	
 	public static enum Oven{
@@ -24,6 +27,29 @@ public final class SearchCriteria {
 	
 	public static enum Speakers{
 		POWER_CONSUMPTION, NUMBER_OF_SPEAKERS, FREQUENCY_RANGE, CORD_LENGTH
+	}
+
+	public static List<String> getEnumFieldsNames() {
+		List<String> resultList = new ArrayList<>();
+		for(Oven name : Oven.values()) {
+			resultList.add(name.name());
+		}
+		for(Laptop name : Laptop.values()) {
+			resultList.add(name.name());
+		}
+		for(Refrigerator name : Refrigerator.values()) {
+			resultList.add(name.name());
+		}
+		for(VacuumCleaner name : VacuumCleaner.values()) {
+			resultList.add(name.name());
+		}
+		for(TabletPC name : TabletPC.values()) {
+			resultList.add(name.name());
+		}
+		for(Speakers name : Speakers.values()) {
+			resultList.add(name.name());
+		}
+		return resultList;
 	}
 	
 	private SearchCriteria() {}
