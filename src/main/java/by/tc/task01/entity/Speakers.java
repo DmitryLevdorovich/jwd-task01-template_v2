@@ -2,9 +2,13 @@ package by.tc.task01.entity;
 
 import by.tc.task01.entity.criteria.SearchCriteria;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Speakers implements Appliance {
+public class Speakers implements Appliance, Serializable {
+
+    private static final long serialVersionUID = 1199041970862591913L;
 
     private double powerConsumption;
     private int numberOfSpeakers;
@@ -33,6 +37,38 @@ public class Speakers implements Appliance {
 
     public double getCordLength() {
         return cordLength;
+    }
+
+    public void setPowerConsumption(double powerConsumption) {
+        this.powerConsumption = powerConsumption;
+    }
+
+    public void setNumberOfSpeakers(int numberOfSpeakers) {
+        this.numberOfSpeakers = numberOfSpeakers;
+    }
+
+    public void setFrequencyRange(String frequencyRange) {
+        this.frequencyRange = frequencyRange;
+    }
+
+    public void setCordLength(double cordLength) {
+        this.cordLength = cordLength;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Speakers speakers = (Speakers) o;
+        return Double.compare(speakers.powerConsumption, powerConsumption) == 0 &&
+                numberOfSpeakers == speakers.numberOfSpeakers &&
+                Double.compare(speakers.cordLength, cordLength) == 0 &&
+                Objects.equals(frequencyRange, speakers.frequencyRange);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(powerConsumption, numberOfSpeakers, frequencyRange, cordLength);
     }
 
     public String toString() {

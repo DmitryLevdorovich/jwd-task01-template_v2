@@ -17,26 +17,25 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 		List<Appliance> searchResultList = new ArrayList<>();
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(dbFile))) {
-			String line = reader.readLine();
-			while(line != null) {
-				String[] parsedLineArray = parseLine(line);
-				if(criteria.getGroupSearchName().equals(parsedLineArray[0]) || criteria.getGroupSearchName().isEmpty()) {
+			String lineFromDB = reader.readLine();
+			while(!lineFromDB.isEmpty()) {
+				String[] parsedLineByGroup = parseLine(lineFromDB);
+				if(criteria.getGroupSearchName().equals(parsedLineByGroup[0]) || criteria.getGroupSearchName().isEmpty()) {
 
-					List<String> dbKeyValueStrings = parseKeyValueStringsFromLine(parsedLineArray[1]);
+					List<String> parsedGroupLineByFields = parseKeyValueStringsFromLine(parsedLineByGroup[1]);
 					List<String> criteriaStrings = criteria.getCriteriaStrings();
-					if (dbKeyValueStrings.containsAll(criteriaStrings)) {
-						ApplianceDirector director = new ApplianceDirector(parsedLineArray[0]);
-
-						searchResultList.add(director.createAppliance(parseValuesFromDbList(dbKeyValueStrings)));
+					if (parsedGroupLineByFields.containsAll(criteriaStrings)) {
+						ApplianceDirector director = new ApplianceDirector(parsedLineByGroup[0]);
+						searchResultList.add(director.createAppliance(parseValuesFromDbList(parsedGroupLineByFields)));
 					}
 				}
-				line = reader.readLine();
+				lineFromDB = reader.readLine();
 			}
 
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(file + "file not found. " + e.getStackTrace());;
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("in/out exception " + e.getStackTrace());
 		}
 
 		return searchResultList;

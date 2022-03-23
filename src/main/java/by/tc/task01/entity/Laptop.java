@@ -2,9 +2,13 @@ package by.tc.task01.entity;
 
 import by.tc.task01.entity.criteria.SearchCriteria;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Laptop implements Appliance {
+public class Laptop implements Appliance, Serializable {
+
+    private static final long serialVersionUID = 3335497120785244381L;
 
     private double batteryCapacity;
     private String operationSystem;
@@ -46,6 +50,46 @@ public class Laptop implements Appliance {
 
     public double getDisplayInches() {
         return displayInches;
+    }
+
+    public void setBatteryCapacity(double batteryCapacity) {
+        this.batteryCapacity = batteryCapacity;
+    }
+
+    public void setOperationSystem(String operationSystem) {
+        this.operationSystem = operationSystem;
+    }
+
+    public void setMemoryROM(int memoryROM) {
+        this.memoryROM = memoryROM;
+    }
+
+    public void setMemoryRAM(int memoryRAM) {
+        this.memoryRAM = memoryRAM;
+    }
+
+    public void setCpu(double cpu) {
+        this.cpu = cpu;
+    }
+
+    public void setDisplayInches(double displayInches) {
+        this.displayInches = displayInches;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Laptop laptop = (Laptop) o;
+        return Double.compare(laptop.batteryCapacity, batteryCapacity) == 0 && memoryROM == laptop.memoryROM &&
+                memoryRAM == laptop.memoryRAM && Double.compare(laptop.cpu, cpu) == 0 &&
+                Double.compare(laptop.displayInches, displayInches) == 0 &&
+                Objects.equals(operationSystem, laptop.operationSystem);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(batteryCapacity, operationSystem, memoryROM, memoryRAM, cpu, displayInches);
     }
 
     public String toString() {

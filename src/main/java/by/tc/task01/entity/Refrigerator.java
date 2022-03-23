@@ -2,9 +2,13 @@ package by.tc.task01.entity;
 
 import by.tc.task01.entity.criteria.SearchCriteria;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Refrigerator implements Appliance {
+public class Refrigerator implements Appliance, Serializable {
+
+    private static final long serialVersionUID = -8726926441621976643L;
 
     private double powerConsumption;
     private double weight;
@@ -50,6 +54,52 @@ public class Refrigerator implements Appliance {
 
     public double getWidth() {
         return width;
+    }
+
+    public void setPowerConsumption(double powerConsumption) {
+        this.powerConsumption = powerConsumption;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setFreezerCapacity(double freezerCapacity) {
+        this.freezerCapacity = freezerCapacity;
+    }
+
+    public void setOverallCapacity(double overallCapacity) {
+        this.overallCapacity = overallCapacity;
+    }
+
+    public void setDepth(double depth) {
+        this.depth = depth;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Refrigerator that = (Refrigerator) o;
+        return Double.compare(that.powerConsumption, powerConsumption) == 0 &&
+                Double.compare(that.weight, weight) == 0 &&
+                Double.compare(that.freezerCapacity, freezerCapacity) == 0 &&
+                Double.compare(that.overallCapacity, overallCapacity) == 0 &&
+                Double.compare(that.depth, depth) == 0 && Double.compare(that.height, height) == 0 &&
+                Double.compare(that.width, width) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(powerConsumption, weight, freezerCapacity, overallCapacity, depth, height, width);
     }
 
     public String toString() {

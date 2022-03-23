@@ -2,9 +2,13 @@ package by.tc.task01.entity;
 
 import by.tc.task01.entity.criteria.SearchCriteria;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Oven implements Appliance {
+public class Oven implements Appliance, Serializable {
+
+    private static final long serialVersionUID = 6283958095482609458L;
 
     private double powerConsumption;
     private double weight;
@@ -46,6 +50,46 @@ public class Oven implements Appliance {
 
     public double getWidth() {
         return width;
+    }
+
+    public void setPowerConsumption(double powerConsumption) {
+        this.powerConsumption = powerConsumption;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setCapacity(double capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setDepth(double depth) {
+        this.depth = depth;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Oven oven = (Oven) o;
+        return Double.compare(oven.powerConsumption, powerConsumption) == 0 &&
+                Double.compare(oven.weight, weight) == 0 && Double.compare(oven.capacity, capacity) == 0 &&
+                Double.compare(oven.depth, depth) == 0 && Double.compare(oven.height, height) == 0 &&
+                Double.compare(oven.width, width) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(powerConsumption, weight, capacity, depth, height, width);
     }
 
     public String toString() {

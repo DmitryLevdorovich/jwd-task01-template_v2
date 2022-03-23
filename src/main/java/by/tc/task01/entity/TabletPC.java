@@ -2,9 +2,13 @@ package by.tc.task01.entity;
 
 import by.tc.task01.entity.criteria.SearchCriteria;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class TabletPC implements Appliance {
+public class TabletPC implements Appliance, Serializable {
+
+    private static final long serialVersionUID = -7168273923491701106L;
 
     private double batteryCapacity;
     private String operationSystem;
@@ -45,6 +49,47 @@ public class TabletPC implements Appliance {
     }
 
     public String getOperationSystem() { return operationSystem; }
+
+    public void setBatteryCapacity(double batteryCapacity) {
+        this.batteryCapacity = batteryCapacity;
+    }
+
+    public void setDisplayInches(double displayInches) {
+        this.displayInches = displayInches;
+    }
+
+    public void setMemoryRAM(int memoryRAM) {
+        this.memoryRAM = memoryRAM;
+    }
+
+    public void setFlashMemoryCapacity(int flashMemoryCapacity) {
+        this.flashMemoryCapacity = flashMemoryCapacity;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public void setOperationSystem(String operationSystem) {
+        this.operationSystem = operationSystem;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TabletPC tabletPC = (TabletPC) o;
+        return Double.compare(tabletPC.batteryCapacity, batteryCapacity) == 0 &&
+                Double.compare(tabletPC.displayInches, displayInches) == 0 &&
+                memoryRAM == tabletPC.memoryRAM && flashMemoryCapacity == tabletPC.flashMemoryCapacity &&
+                Objects.equals(operationSystem, tabletPC.operationSystem) &&
+                Objects.equals(colour, tabletPC.colour);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(batteryCapacity, operationSystem, displayInches, memoryRAM, flashMemoryCapacity, colour);
+    }
 
     public String toString() {
         String className = this.getClass().getSimpleName();
