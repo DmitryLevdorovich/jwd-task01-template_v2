@@ -15,6 +15,8 @@ public class Speakers implements Appliance, Serializable {
     private String frequencyRange;
     private double cordLength;
 
+    public Speakers() {}
+
     public Speakers(double powerConsumption, int numberOfSpeakers,
                     String frequencyRange, double cordLength) {
         this.powerConsumption = powerConsumption;

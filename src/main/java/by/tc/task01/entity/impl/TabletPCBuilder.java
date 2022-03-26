@@ -1,9 +1,12 @@
 package by.tc.task01.entity.impl;
 
+import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.ApplianceBuilder;
 import by.tc.task01.entity.TabletPC;
 
-public class TabletPCBuilder implements ApplianceBuilder {
+import java.io.Serializable;
+
+public class TabletPCBuilder implements ApplianceBuilder, Serializable {
 
     private double batteryCapacity;
     private String operationSystem;
@@ -12,7 +15,13 @@ public class TabletPCBuilder implements ApplianceBuilder {
     private int flashMemoryCapacity;
     private String colour;
 
-    public TabletPC getTabletPC() {
+    public Appliance build(String[] parameters) {
+
+        setPowerSupply(Double.parseDouble(parameters[0]));
+        setOS(parameters[1]);
+        setDisplaySize(Double.parseDouble(parameters[2]));
+        setMemory(Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
+        setColour(parameters[5]);
         return new TabletPC(batteryCapacity, operationSystem, displayInches,
                 memoryRAM, flashMemoryCapacity, colour);
     }

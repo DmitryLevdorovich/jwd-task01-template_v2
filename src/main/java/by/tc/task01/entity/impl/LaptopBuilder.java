@@ -1,9 +1,12 @@
 package by.tc.task01.entity.impl;
 
+import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.ApplianceBuilder;
 import by.tc.task01.entity.Laptop;
 
-public class LaptopBuilder implements ApplianceBuilder {
+import java.io.Serializable;
+
+public class LaptopBuilder implements ApplianceBuilder, Serializable {
 
     private double powerSupply;
     private String operationSystem;
@@ -80,7 +83,13 @@ public class LaptopBuilder implements ApplianceBuilder {
 
     }
 
-    public Laptop getLaptop() {
+    @Override
+    public Appliance build(String[] parameters) {
+        setPowerSupply(Double.parseDouble(parameters[0]));
+        setOS(parameters[1]);
+        setMemory(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+        setCPU(Double.parseDouble(parameters[4]));
+        setDisplaySize(Double.parseDouble(parameters[5]));
         return new Laptop(powerSupply, operationSystem, memoryROM, memoryRAM,
                 cpu, displayInches);
     }

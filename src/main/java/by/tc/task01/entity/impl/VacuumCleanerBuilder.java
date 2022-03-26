@@ -1,9 +1,12 @@
 package by.tc.task01.entity.impl;
 
+import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.ApplianceBuilder;
 import by.tc.task01.entity.VacuumCleaner;
 
-public class VacuumCleanerBuilder implements ApplianceBuilder {
+import java.io.Serializable;
+
+public class VacuumCleanerBuilder implements ApplianceBuilder, Serializable {
 
     private double powerConsumption;
     private double capacity;
@@ -13,7 +16,13 @@ public class VacuumCleanerBuilder implements ApplianceBuilder {
     private double motorSpeedRegulation;
     private double cleaningWidth;
 
-    public VacuumCleaner getVacuumCleaner() {
+    public Appliance build(String[] parameters) {
+
+        setPowerSupply(Double.parseDouble(parameters[0]));
+        setCapacity(Double.parseDouble(parameters[1]));
+        setVCAccessories(parameters[2], parameters[3], parameters[4]);
+        setMotorSpeed(Double.parseDouble(parameters[5]));
+        setLength(Double.parseDouble(parameters[6]));
         return new VacuumCleaner(powerConsumption, capacity, filterType, bagType,
                 wandType, motorSpeedRegulation, cleaningWidth);
     }

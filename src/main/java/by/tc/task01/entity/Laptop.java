@@ -17,6 +17,8 @@ public class Laptop implements Appliance, Serializable {
     private double cpu;
     private double displayInches;
 
+    public Laptop() {}
+
     public Laptop(double batteryCapacity, String operationSystem,
                   int memoryROM, int memoryRAM, double cpu,
                   double displayInches) {

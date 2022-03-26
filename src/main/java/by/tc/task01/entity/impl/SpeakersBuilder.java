@@ -1,9 +1,12 @@
 package by.tc.task01.entity.impl;
 
+import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.ApplianceBuilder;
 import by.tc.task01.entity.Speakers;
 
-public class SpeakersBuilder implements ApplianceBuilder {
+import java.io.Serializable;
+
+public class SpeakersBuilder implements ApplianceBuilder, Serializable {
 
     private double powerSupply;
     private int numberOfSpeakers;
@@ -63,7 +66,12 @@ public class SpeakersBuilder implements ApplianceBuilder {
         this.cordLength = length;
     }
 
-    public Speakers getSpeakers() {
+    public Appliance build(String[] parameters) {
+
+        setPowerSupply(Double.parseDouble(parameters[0]));
+        setSpeakersNumber(Integer.parseInt(parameters[1]));
+        setFrequencyRange(parameters[2]);
+        setLength(Double.parseDouble(parameters[3]));
         return new Speakers(powerSupply, numberOfSpeakers, frequencyRange, cordLength);
     }
 }

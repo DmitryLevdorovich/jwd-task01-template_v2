@@ -17,6 +17,8 @@ public class Oven implements Appliance, Serializable {
     private double height;
     private double width;
 
+    public Oven() {}
+
     public Oven(double powerConsumption, double weight,
                 double capacity, double depth,
                 double height, double width) {

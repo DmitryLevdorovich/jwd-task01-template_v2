@@ -2,6 +2,8 @@ package by.tc.task01.entity;
 
 public interface ApplianceBuilder {
 
+    public Appliance build(String[] values);
+
     public void setPowerSupply(double powerSupplyValue);
     public void setDimensions(double width, double height, double depth);
     public void setDisplaySize(double displaySize);

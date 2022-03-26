@@ -18,6 +18,8 @@ public class Refrigerator implements Appliance, Serializable {
     private double height;
     private double width;
 
+    public Refrigerator() {}
+
     public Refrigerator(double powerConsumption, double weight,
                         double freezerCapacity, double overallCapacity,
                         double depth, double height, double width) {

@@ -18,6 +18,8 @@ public class VacuumCleaner implements Appliance, Serializable {
     private double motorSpeedRegulation;
     private double cleaningWidth;
 
+    public VacuumCleaner() {}
+
     public VacuumCleaner(double powerConsumption, double capacity, String filterType,
                          String bagType, String wandType,
                          double motorSpeedRegulation, double cleaningWidth) {

@@ -1,15 +1,11 @@
 package by.tc.task01.entity.criteria;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Criteria {
 
 	private String groupSearchName;
-	private Map<String, Object> criteria = new HashMap<String, Object>();
+	private Map<String, String> criteria = new HashMap<>();
 
 	public Criteria(String groupSearchName) {
 		this.groupSearchName = groupSearchName;
@@ -20,15 +16,27 @@ public class Criteria {
 	}
 
 	public void add(String searchCriteria, Object value) {
-		criteria.put(searchCriteria, value.toString());
+		if(searchCriteria.isEmpty()) {
+			throw new RuntimeException("empty criteria");
+		} else {
+			criteria.put(searchCriteria, value.toString());
+		}
 	}
 	
-	public Map<String, Object> getCriteria() { return this.criteria; }
+	public Map<String, String> getCriteria() { return this.criteria; }
 
 	public List<String> getCriteriaStrings() {
 		List<String> strings = new ArrayList<>();
-		for (Map.Entry entry : this.getCriteria().entrySet()) {
-			strings.add(entry.getKey().toString() + "=" + entry.getValue().toString());
+		for (Map.Entry<String, String> entry : this.getCriteria().entrySet()) {
+			strings.add(entry.getKey() + "=" + entry.getValue());
+		}
+		return strings;
+	}
+
+	public List<String> getSearchCriteriaStrings() {
+		List<String> strings = new ArrayList<>();
+		for (Map.Entry<String, String> entry : this.getCriteria().entrySet()) {
+			strings.add(entry.getKey());
 		}
 		return strings;
 	}

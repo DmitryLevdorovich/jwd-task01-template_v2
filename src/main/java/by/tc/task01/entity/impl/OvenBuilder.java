@@ -1,9 +1,12 @@
 package by.tc.task01.entity.impl;
 
+import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.ApplianceBuilder;
 import by.tc.task01.entity.Oven;
 
-public class OvenBuilder implements ApplianceBuilder {
+import java.io.Serializable;
+
+public class OvenBuilder implements ApplianceBuilder, Serializable {
 
     private double powerConsumption;
     private double weight;
@@ -79,7 +82,12 @@ public class OvenBuilder implements ApplianceBuilder {
 
     }
 
-    public Oven getOven() {
+    public Appliance build(String[] parameters) {
+        setPowerSupply(Double.parseDouble(parameters[0]));
+        setWeight(Double.parseDouble(parameters[1]));
+        setCapacity(Double.parseDouble(parameters[2]));
+        setDimensions(Double.parseDouble(parameters[3]),
+                Double.parseDouble(parameters[4]), Double.parseDouble(parameters[5]));
         return new Oven(powerConsumption, weight, capacity, depth,
                 height, width);
     }

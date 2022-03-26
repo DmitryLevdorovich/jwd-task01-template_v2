@@ -17,6 +17,8 @@ public class TabletPC implements Appliance, Serializable {
     private int flashMemoryCapacity;
     private String colour;
 
+    public TabletPC() {}
+
     public TabletPC(double batteryCapacity, String os,
                     double displayInches, int memoryROM,
                     int flashMemoryCapacity, String colour) {

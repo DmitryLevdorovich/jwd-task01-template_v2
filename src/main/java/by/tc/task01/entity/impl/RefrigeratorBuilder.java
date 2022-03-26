@@ -1,9 +1,12 @@
 package by.tc.task01.entity.impl;
 
+import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.ApplianceBuilder;
 import by.tc.task01.entity.Refrigerator;
 
-public class RefrigeratorBuilder implements ApplianceBuilder {
+import java.io.Serializable;
+
+public class RefrigeratorBuilder implements ApplianceBuilder, Serializable {
 
     private double powerSupply;
     private double weight;
@@ -72,7 +75,13 @@ public class RefrigeratorBuilder implements ApplianceBuilder {
     @Override
     public void setLength(double length) { }
 
-    public Refrigerator getRefrigerator() {
+    public Appliance build(String[] parameters) {
+        setPowerSupply(Double.parseDouble(parameters[0]));
+        setWeight(Double.parseDouble(parameters[1]));
+        setFreezerCapacity(Double.parseDouble(parameters[2]));
+        setCapacity(Double.parseDouble(parameters[3]));
+        setDimensions(Double.parseDouble(parameters[4]),
+                Double.parseDouble(parameters[5]), Double.parseDouble(parameters[6]));
         return new Refrigerator(powerSupply, weight, freezerCapacity,
                 overallCapacity, depth, height, width);
     }

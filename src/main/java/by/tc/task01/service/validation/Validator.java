@@ -9,7 +9,7 @@ public class Validator {
 	
 	public static boolean criteriaValidator(Criteria criteria) {
 
-		List<String> criteriaList = criteria.getCriteriaStrings();
+		List<String> criteriaList = criteria.getSearchCriteriaStrings();
 		List<String> enumNamesList = SearchCriteria.getEnumFieldsNames();
 
 		return enumNamesList.containsAll(criteriaList);
